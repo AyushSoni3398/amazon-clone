@@ -34,7 +34,7 @@ function Home({ setCart, search }) {
             <div className="products-container">
                 {filteredProducts.map((product) => (
                     <ProductCard
-                        key={product.id}
+                        key={product._id}
                         product={product}
                         setCart={setCart}
                     />
