@@ -18,7 +18,7 @@ function Home({ setCart, search }) {
     }, []);
 
     const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(search.toLowerCase())
+        product.title.toLowerCase().includes(search.toLowerCase())
     );
 
     return (
