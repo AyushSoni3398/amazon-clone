@@ -1,7 +1,7 @@
 import api from "../api/axios";
+import "../App.css";
 
 function Cart({ cart, setCart }) {
-
     const total = cart.reduce((sum, product) => {
         return sum + product.price;
     }, 0);
@@ -27,51 +27,61 @@ function Cart({ cart, setCart }) {
             );
 
             alert("Order placed successfully!");
-
             setCart([]);
         } catch (error) {
             alert(error.response?.data?.message || "Checkout failed");
         }
     };
 
-    return (
-        <div style={{ padding: "20px" }}>
+    if (cart.length === 0) {
+        return (
+            <div className="cart-container">
+                <h1>Shopping Cart</h1>
 
+                <div className="empty-cart">
+                    <h2>Your cart is empty</h2>
+                    <p>Add some products to place an order.</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="cart-container">
             <h1>Shopping Cart</h1>
 
-            <h2>Total Items : {cart.length}</h2>
+            <div className="cart-summary">
+                <p><strong>Total Items:</strong> {cart.length}</p>
+                <p><strong>Total Price:</strong> ₹{total.toLocaleString()}</p>
 
-            <button onClick={handleCheckout}>
-                Checkout
-            </button>
+                <button
+                    className="checkout-btn"
+                    onClick={handleCheckout}
+                >
+                    Proceed to Checkout
+                </button>
+            </div>
 
-            <hr />
+            <div className="cart-items">
+                {cart.map((product, index) => (
+                    <div className="cart-item" key={index}>
+                        <div>
+                            <h3>{product.title}</h3>
+                            <p>₹{product.price.toLocaleString()}</p>
+                        </div>
 
-            <h2>Total Price : ₹{total.toLocaleString()}</h2>
-
-            <hr />
-
-            {cart.map((product, index) => (
-                <div key={index}>
-
-                    <h3>{product.title}</h3>
-
-                    <p>₹{product.price.toLocaleString()}</p>
-
-                    <button
-                        onClick={() => {
-                            const updatedCart = cart.filter((_, i) => i !== index);
-                            setCart(updatedCart);
-                        }}
-                    >
-                        Remove
-                    </button>
-
-                    <hr />
-
-                </div>
-            ))}
-
+                        <button
+                            className="remove-btn"
+                            onClick={() => {
+                                const updatedCart = cart.filter((_, i) => i !== index);
+                                setCart(updatedCart);
+                            }}
+                        >
+                            Remove
+                        </button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
