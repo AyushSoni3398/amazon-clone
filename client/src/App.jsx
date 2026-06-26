@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import MyOrders from "./pages/MyOrders";
 
 function App() {
 
@@ -52,7 +53,12 @@ function App() {
           path="/register"
           element={<Register />}
         />
-        
+
+        <Route
+          path="/myorders"
+          element={<MyOrders />}
+        />
+
       </Routes>
     </>
   );

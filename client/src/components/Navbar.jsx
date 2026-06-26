@@ -72,7 +72,11 @@ function Navbar({ cart, search, setSearch }) {
         </h4>
       </div>
 
-      <div className="nav-orders">
+      <div
+        className="nav-orders"
+        onClick={() => navigate("/myorders")}
+        style={{ cursor: "pointer" }}
+      >
         <p>Returns</p>
         <h4>& Orders</h4>
       </div>
