@@ -2,10 +2,22 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import logo from "../assets/amazon-logo.png";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar({ cart, search, setSearch }) {
   const navigate = useNavigate();
+
+  const { token, setToken } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+
+    navigate("/login");
+  };
+
   return (
     <div className="navbar">
       <div className="nav-logo">
@@ -41,9 +53,23 @@ function Navbar({ cart, search, setSearch }) {
         <p>EN</p>
       </div>
 
-      <div className="nav-account">
-        <p>Hello, Sign in</p>
-        <h4>Account & Lists</h4>
+      <div
+        className="nav-account"
+        onClick={() => {
+          if (!token) {
+            navigate("/login");
+          } else {
+            handleLogout();
+          }
+        }}
+      >
+        <p>
+          {token ? "Hello, User" : "Hello, Sign in"}
+        </p>
+
+        <h4>
+          {token ? "Logout" : "Account & Lists"}
+        </h4>
       </div>
 
       <div className="nav-orders">
