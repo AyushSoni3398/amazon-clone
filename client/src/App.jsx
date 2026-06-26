@@ -1,23 +1,36 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "./components/Navbar";
+import SecondaryNavbar from "./components/SecondaryNavbar";
 import Home from "./pages/Home";
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Cart from "./pages/Cart";
 
 function App() {
-  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-  fetch("http://localhost:5000/api/test")
-    .then((res) => res.json())
-    .then((data) => {
-      setMessage(data.message);
-    });
-}, []);
+  const [cart, setCart] = useState([]);
 
   return (
     <>
-      <Navbar />
-      <p>{message}</p>
-      <Home />
+      <Navbar cart={cart} />
+      <SecondaryNavbar />
+
+      <Routes>
+        <Route
+          path="/"
+          element={<Home cart={cart} setCart={setCart} />}
+        />
+
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              cart={cart}
+              setCart={setCart}
+            />
+          }
+        />
+      </Routes>
     </>
   );
 }

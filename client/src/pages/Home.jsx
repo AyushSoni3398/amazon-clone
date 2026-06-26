@@ -1,32 +1,28 @@
+import hero from "../assets/hero.png";
 import ProductCard from "../components/ProductCard";
+import products from "../data/products";
 
-function Home() {
-    const products = [
-        {
-            name: "iPhone 15",
-            price: "₹79,999",
-        },
-        {
-            name: "Samsung S24",
-            price: "₹69,999",
-        },
-        {
-            name: "MacBook Air",
-            price: "₹99,999",
-        },
-    ];
+function Home({ setCart }) {
 
     return (
         <div style={{ padding: "20px" }}>
+            <img
+                className="hero-banner"
+                src={hero}
+                alt="Amazon Hero Banner"
+            />
+
             <h1>Products</h1>
 
-            {products.map((product) => (
-                <ProductCard
-                    key={product.name}
-                    name={product.name}
-                    price={product.price}
-                />
-            ))}
+            <div className="products-container">
+                {products.map((product) => (
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        setCart={setCart}
+                    />
+                ))}
+            </div>
         </div>
     );
 }
