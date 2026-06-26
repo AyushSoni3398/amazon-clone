@@ -4,7 +4,7 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import logo from "../assets/amazon-logo.png";
 import { useNavigate } from "react-router-dom";
 
-function Navbar({ cart }) {
+function Navbar({ cart, search, setSearch }) {
   const navigate = useNavigate();
   return (
     <div className="navbar">
@@ -28,6 +28,8 @@ function Navbar({ cart }) {
         <input
           type="text"
           placeholder="Search Amazon.in"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
 
         <button>

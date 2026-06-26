@@ -3,7 +3,7 @@ import ProductCard from "../components/ProductCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function Home({ setCart }) {
+function Home({ setCart, search }) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -17,6 +17,10 @@ function Home({ setCart }) {
             });
     }, []);
 
+    const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
         <div style={{ padding: "20px" }}>
             <img
@@ -28,7 +32,7 @@ function Home({ setCart }) {
             <h1>Products</h1>
 
             <div className="products-container">
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                     <ProductCard
                         key={product.id}
                         product={product}

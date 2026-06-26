@@ -9,16 +9,26 @@ import Cart from "./pages/Cart";
 function App() {
 
   const [cart, setCart] = useState([]);
+  const [search, setSearch] = useState("");
 
   return (
     <>
-      <Navbar cart={cart} />
+      <Navbar
+        cart={cart}
+        search={search}
+        setSearch={setSearch}
+      />
       <SecondaryNavbar />
 
       <Routes>
         <Route
           path="/"
-          element={<Home cart={cart} setCart={setCart} />}
+          element={
+            <Home
+              setCart={setCart}
+              search={search}
+            />
+          }
         />
 
         <Route
