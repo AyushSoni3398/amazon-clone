@@ -1,8 +1,21 @@
 import hero from "../assets/hero.png";
 import ProductCard from "../components/ProductCard";
-import products from "../data/products";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Home({ setCart }) {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:5000/api/products")
+            .then((response) => {
+                setProducts(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
 
     return (
         <div style={{ padding: "20px" }}>
