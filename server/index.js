@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.get("/api/test", (req, res) => {
 // Routes
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 const PORT = 5000;
 
