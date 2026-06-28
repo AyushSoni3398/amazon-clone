@@ -1,14 +1,14 @@
 import hero from "../assets/hero.png";
 import ProductCard from "../components/ProductCard";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axios";
 
 function Home({ setCart, search }) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios
-            .get("http://localhost:5000/api/products")
+        api
+            .get("/products")
             .then((response) => {
                 setProducts(response.data);
             })
